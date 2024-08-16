@@ -15,9 +15,6 @@ data "aws_ami" "app_ami" {
 }
 
 
-data "aws_vpc" "default"{
-  default = true
-}
 
 module "blog_vpc" {
   source                                     = "dwp/vpc/aws"
