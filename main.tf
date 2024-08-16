@@ -21,13 +21,21 @@ resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 
+<<<<<<< HEAD
+  vpc_security_group_ids = [aws_security_group.blog.id]
+
+=======
   vpc_security_groups_ids = [aws_security_group.blog.id]
 
+>>>>>>> 61333f530a30a4a2a98f015746a414915dba998d
   tags = {
     Name = "HelloWorld"
   }
 }
 
+<<<<<<< HEAD
+
+=======
 resource "aws_security_group" "blog"{
   name = "blog"
   description = "Allow http and https in. Allow everthing out"
@@ -61,3 +69,5 @@ resource "aws_security_group_rule" "blog_everything_out"{
   cidr_blocks = ["0.0.0.0/0"] 
   security_group_id = aws_security_group.blog.id
 }
+
+>>>>>>> 61333f530a30a4a2a98f015746a414915dba998d
