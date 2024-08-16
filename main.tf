@@ -15,15 +15,21 @@ data "aws_ami" "app_ami" {
 }
 
 
-
-module "blog_vpc" {
-  source                                     = "dwp/vpc/aws"
-  vpc_name                                   = "dev"
-  region                                     = "us-west-2"
-  vpc_cidr_block                             = "192.168.0.0/24"
-  interface_vpce_source_security_group_ids   = ["${module_blog_sg.aws_security_group.source.id}"]
-  interface_vpce_subnet_ids                  = ["${module_blog_vpc.public_subnets[0]}"]
+# If you need both instances, rename one
+data "aws_vpc" "default" {
+  filter {
+    name   = "tag:Name"
+    values = ["my-vpc"]
+  }
 }
+
+data "aws_vpc" "secondary" {  # Renamed to 'secondary' or something else
+  filter {
+    name   = "tag:Name"
+    values = ["my-other-vpc"]
+  }
+}
+
 
 
 module "blog_autoscaling" {
